@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>哈哈哈</h2>
+    <div id="app">
+
+    </div>
+
+
+
+
+    <!-- 通过 CDN 服务器 引入 Vue的代码 -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- 使用Vue -->
+    <script>
+        const app  = Vue.createApp({
+            template: '<h2>hello world</h2>'
+        })
+    // 使用 挂载, id 为 app 的 div, 把 <h2>hello world</h2> 放到 div 里面
+        app.mount("#app")
+    </script>
+    
+</body>
+</html>

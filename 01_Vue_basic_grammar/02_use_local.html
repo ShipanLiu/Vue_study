@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    // 创建空壳
+    <div id="app"></div>
+
+    <!-- 通过 本地的方式 引入： -->
+    <script src="./lib/vue.js"></script>
+    <!-- 使用Vue -->
+    <script>
+        const app  = Vue.createApp({
+            template: '<h2>hello  Vue</h2>'
+        })
+    // 使用 挂载, id 为 app 的 div, 把 <h2>hello world</h2> 放到 div 里面
+        app.mount("#app")
+    </script>
+    
+</body>
+</html>

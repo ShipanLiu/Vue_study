@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./lib/vue.js"></script>
+
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            // 这是 插值语法:  {{变量}}   
+            template: `<h2>{{title}}</h2>`,
+            // 这个必须是一个函数,没有手动操作 Dom，你从服务器中拿到 一个值，动态 把值 插入到 html 里面。
+            data: function() {
+                return {
+                    title: "hello world jier",
+                    myMessage: "this is a message"
+                }
+            }
+        })
+        app.mount("#app");
+    </script>
+    
+</body>
+</html>

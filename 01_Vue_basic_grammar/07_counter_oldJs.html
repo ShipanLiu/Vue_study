@@ -1,0 +1,44 @@
+<!-- 使用 原生的 js 方式 实现 counter -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>当前计数：<span class="counter"></span></h2>
+    <button class="add">+1</button>
+    <button class="sub">-1</button>
+
+    <script>
+        // 获取 DOM
+        const h2Tag = document.querySelector("h2")
+        const counterTag = document.querySelector(".counter")
+        const addTag = document.querySelector(".add")
+        const subTag = document.querySelector(".sub")
+
+
+        let counter = 0
+        h2Tag.textContent = counter
+
+        // 监听 按钮的 点击 
+        addTag.onclick = function() {
+            counter++
+            h2Tag.textContent = counter
+        }
+
+        subTag.onclick = function() {
+            counter--
+            h2Tag.textContent = counter
+        }
+
+    </script>
+    
+    
+</body>
+</html>
