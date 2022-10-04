@@ -1,3 +1,6 @@
+// 利用网站 ： https://snippet-generator.app/
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +11,7 @@
 </head>
 <body>
     <div id="app">
-        <h2>current nr: {{counter}}</h2>
-        <button @click="decrement">-</button>
-        <button @click="increment">+</button>
+        <h2></h2>
     </div>
 
     <script src="./lib/vue.js"></script>
@@ -18,25 +19,15 @@
         const app = Vue.createApp({
             data() {
                 return ({
-                    counter: 0
+                    message: "hello Vue"
                 })
             },
             methods: {
-                decrement: function() {
-                    console.log("function1 is clicked");
-                    this.counter--
+                function1: function() {
+                    console.log("here is something");
                 },
-                increment: function() {
-                    this.counter++
-                },
-                // es6 styles
-                function3() {
-
-                }
-            },
-
+            }
         })
-
         app.mount("#app")
     </script>
 </body>

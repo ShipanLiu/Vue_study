@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            /* 在 你加上 v-cloak 的时候，在没渲染完事的时候， 先不展示 */
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--  基本使用 -->
+        <h2>{{message}}</h2>
+         <!-- 和上面一样效果 -->
+        <h2 v-text="message"></h2>
+        <!-- 把 html 放进去 -->
+        <h2 v-html="html1"></h2>
+        <h2>{{message.split(" ")}}</h2>
+        <h2>{{counter * 2}}</h2>
+        <!-- 我就想显示 两个 {{}} -->
+        <p v-pre>{{}}</p>
+        <!--不重要 ！！！ v-cloak 等你渲染完事 之后， 我再显示 , 要 和 css 一起使用： 网速慢 的情况下 ， vue会之后 把 斗篷删掉-->
+        <h2 v-cloak>{{message}}</h2>
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    message: "hello Vue",
+                    counter: 1,
+                    html1: `<span style="color: red; font-size: 30px;">jier<span>`
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>
