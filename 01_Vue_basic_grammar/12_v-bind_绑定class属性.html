@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+
+        .class2 {
+            font-size: large;
+        }
+        .normalClass {
+            font-weight: 600;
+        }
+
+        .why {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 对象语法{} 里面是： key : value   value 必须是 boolean 类型 -->
+        <button @click="btnClick1" :class="{active: isActive}">click me1</button>
+
+        <!-- 对象语法 的多个键值对 -->
+        <!-- 普通的 class 和 :class是没有影响的 -->
+        <button class="normalClass" @click="btnClick2" :class="{active: isActive, class2: true, class3: false}">click me2</button>
+        <!-- 把class 那个对象 抽取出来, 抽成一个方法 -->
+        <button class="normalClass" @click="btnClick2" :class="getDynamicClasses()">click me3</button>
+
+
+        <!-- 另一种是新方式： 数组语法（用的不多） -->
+        <button class="normalClass" @click="btnClick2" :class="['class2', class3, {active: isActive}]">click me4</button>
+
+
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    message: "hello Vue",
+                    isActive: true,
+                    class3: "why",
+                })
+            },
+            methods: {
+                btnClick1: function() {
+                    this.isActive = !this.isActive;
+                    console.log("jier");
+                },
+
+                btnClick2() {
+                    this.isActive = !this.isActive;
+                },
+
+                getDynamicClasses() {
+                    return {active: this.isActive, class2: true, class3: false};
+                }
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

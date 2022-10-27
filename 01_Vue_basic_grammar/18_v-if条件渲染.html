@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+         }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <div class="info">
+            <h2>个人信息展示</h2>
+            <!-- 把条件写在 template 里里面， 不用再写在 div 里面了， 提高效率 -->
+            <template v-if="Object.keys(info).length >= 2">
+                <ul>
+                    <li>name: {{info.name}}</li>
+                    <li>age: {{info.age}}</li>
+                </ul>
+            </template>
+            <template v-else-if="Object.keys(info).length < 2 &&Object.keys(info).length > 0">
+                <h2 >不全</h2>
+            </template>
+            <template v-else>
+                <h2>info is empty</h2>
+            </template>
+        <div/>
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    message: "hello Vue",
+                    info: {
+                        name: "jier",
+                        age: 24,
+                    }
+                })
+            },
+            methods: {
+                btnClick: function() {
+                    console.log("btnClick");
+                },
+
+                divClick() {
+                    console.log("divClick");
+                }
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

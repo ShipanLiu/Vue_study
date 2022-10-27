@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 实际开发中， style里面的某些值是来自 data 里面的 ,也是 对象绑定-->
+        <h2 :style="{color: myColor, 'font-size': '30px'}">哈哈哈哈</h2>
+        <!-- 或者写成驼峰的方式(用的比较多)， 自动解析 -->
+        <h2 :style="{color: myColor, fontSize: fontSize + 'px'}">哈哈哈哈</h2>
+        <!-- (很少用)把 style 组装成一个对象 （注意 styleObj 本身就有 一个 {} ）-->
+        <h2 :style="styleObj">hahaha</h2>
+        <!-- style的数组语法 , pink需要使用 单引号，  因为是 在双引号里面的-->
+        <h2 :style="[styleObj, {backgroundColor: 'pink'}]">hehehheheh</h2>
+
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    myColor: "red",
+                    fontSize: 60,
+                    styleObj: {
+                        color: "blue",
+                        fontSize: "50px",
+                    },
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+            }
+        })
+        app.mount("#app")
+
+
+    </script>
+</body>
+</html>

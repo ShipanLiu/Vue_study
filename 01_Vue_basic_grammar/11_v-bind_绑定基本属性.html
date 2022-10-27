@@ -1,0 +1,54 @@
+<!-- 
+
+之前讲的 都是 插入标签内容的， 如 <h2>{{message}}</h2>
+现在讲的 v-bind 是 插入  属性， 如 <img src="">  
+
+
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定 img 的 src属性 -->
+        <img v-bind:src="showImg" alt="">
+        <a v-bind:href="baidu">百度一下</a>
+        <!-- 使用 语法糖 -->
+        <a :href="google">google</a>
+        <div>
+            <button @click="switchImg">switch picture</button>
+        </div>
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    img1: "http://p1.music.126.net/FSrvymKUK76dG9uoNvNOIw==/109951168003342967.jpg",
+                    img2: "https://p1.music.126.net/7ZXPFb35bj_5v0o80Ei-jw==/109951168003359564.jpg",
+                    showImg: "https://p1.music.126.net/7ZXPFb35bj_5v0o80Ei-jw==/109951168003359564.jpg",
+                    baidu: "https://www.baidu.com",
+                    google: "https://google.com" 
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+                switchImg() {
+                    this.showImg = this.showImg === this.img1 ? this.img2 : this.img1
+                }
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

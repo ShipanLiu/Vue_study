@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 传递明确的参数, 那就会自动 抛弃 event 参数 -->
+        <button @click="btnClick2('jier', age)">按钮1</button>
+        <!-- 假如你想要带上 event 参数的话 -->
+        <button @click="btnClick3('jier', age, $event)">按钮2</button>
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    message: "hello Vue",
+                    age: 24
+                })
+            },
+            methods: {
+                // 默认的参数是 event（前提是没有其他的参数传进来。）
+                btnClick1(event) {
+                    console.log(event);
+                },
+
+                btnClick2(name, age) {
+                    console.log(name, age);
+                },
+
+                btnClick3(name, age, event) {
+                    console.log(name, age, event);
+                }
+            }  
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

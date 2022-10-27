@@ -1,4 +1,3 @@
-<!-- 就是 备忘录【缓存】 ： 提高性能 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <!--  表示 在这个 div 里面， 只有 name 在改变的时候， 才可以改变， name 不改变的时候， 全跳过去。 -->
-        <div v-memo="[name]">
-           <h2>name: {{name}}</h2>
-            <h2>age: {{age}}</h2>
-            <h2>mesage: {{message}}</h2> 
-        </div>
-        <button @click="updateInfo">update Info</button>
-        
+        <!-- v-bind直接把 对象 绑定进来 , 作用： 给组件进行传参-->
+        <h2 v-bind="infos">jier</h2>
     </div>
 
     <script src="./lib/vue.js"></script>
@@ -24,19 +17,16 @@
         const app = Vue.createApp({
             data() {
                 return ({
-                    message: "hello Vue",
-                    name: "Vue",
-                    age: 24,
+                    infos: {
+                        name: "jier",
+                        age: 24,
+                    },
                 })
             },
             methods: {
                 function1: function() {
                     console.log("here is something");
                 },
-                updateInfo() {
-                    this.message = "jier"
-                    this.name = "no Vue"
-                }
             }
         })
         app.mount("#app")

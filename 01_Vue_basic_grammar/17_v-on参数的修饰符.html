@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+         }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <!-- 根据冒泡， 你点击 button， 上级的 div 也会触发事件,我们不希望这样： 于是：@click.stop 用这个修饰符 -->
+        <div class="box" @click="divClick">
+            <button @click.stop="btnClick">按钮</button>
+        </div>
+
+        <div>
+            <!-- 要经常根据服务器的 返回的数据进行 区别 -->
+            <ul v-if="names.length > 0">
+                <li v-for="item in names">
+                    {{item}}
+                </li>
+            </ul>
+            
+            <h2 v-else>names is empty</h2>
+        </div>
+        
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    message: "hello Vue",
+                    names: ["jier1", "jier2", "jier3"]
+                })
+            },
+            methods: {
+                btnClick: function() {
+                    console.log("btnClick");
+                },
+
+                divClick() {
+                    console.log("divClick");
+                }
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>
