@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <ul>
+                <li v-for="(item, index) in movies">{{index+1}} : {{item}}</li>
+            </ul>
+        </div>
+        <h2>商品列表</h2>
+        <div class="product" v-for="(item, index) in products">
+            <h3>{{index}}</h3>
+            <h3>{{item.name}}</h3>
+            <span>{{item.age}}</span>
+            <p>{{item.email}}</p>
+        </div>
+
+        <div>
+          <ul>
+            <li v-for="(value, key, index) in stu">{{index+1}}-{{key}}:{{value}}</li>
+          </ul>
+        </div>
+
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    movies: ["m1", "m2", "m3"],
+                    products: [
+                        {name: "jier1", age: 24, email: "jier1@gmail.com"},
+                        {name: "jier2", age: 25, email: "jier2@gmail.com"},
+                        {name: "jier3", age: 26, email: "jier3@gmail.com"}
+                    ],
+                    stu: {name: "Thomas", age: 26, email: "Thomas@gmail.com"}
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

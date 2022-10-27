@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+          <li v-for="item in arr">{{item}}</li>
+        </ul>
+        <button @click="changeArr">click</button>
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    arr: ["q", "2", "3"]
+                })
+            },
+            methods: {
+                changeArr() {
+                    // this.arr = ["jie", "jiert"];
+                    // this.arr.push("why");
+                    // this.arr.shift();  // delete the first item
+                    // this.arr.unshift("coder"); // add one item at the top
+                    // this.arr.splice(2, 1, "ebay", "amazon");
+
+                    // if you do not use the method of arr, they will not be automatically rerendered
+                    const newArr = this.arr.map((item) => item + "shipan");
+                    console.log(newArr);
+                    this.arr = newArr;
+                },
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+          <!-- key属性不是来自html， 而是来自 Vue,  -->
+          <!-- 之后， 只要你 进行for循环， 那就要绑定key -->
+          <li v-for="item in arr" :key="item.id">
+            id: {{item.id}}
+            name: {{item.name}}
+          </li>
+        </ul>
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    arr: [{
+                      id: 1,
+                      name: "jier1"
+                    },
+                    {
+                      id: 2,
+                      name: "jier2"
+                    }
+                  ]
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>
