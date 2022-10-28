@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <div>
+        <h2>{{fullName}}</h2>
+        <h2>{{scoreLevel}}</h2>
+        <h2>{{reverseMessage}}</h2>
+        <button @click="btnClick">修改message</button>
+      </div>
+
+      <div>
+        <div v-for="(obj, index) in info">
+          <h3>{{index+1}}</h3>
+            <ul>
+              <li v-for="(item, key, index) in obj">{{index+1}}-{{key}}: {{item}}</li>
+            </ul>
+        </div>
+      </div>
+      <button @click="btnAdd">增加一组到info</button>
+
+    </div>
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    firstName: "Shipan",
+                    lastName: "Liu",
+                    score: 98,
+
+                    message: "I am smart",
+                    info: [{name: "jier", age: 24}, {name: "danis", age: 25}]
+
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+                btnClick() {
+                  this.message = "jier";
+                },
+                btnAdd() {
+                  this.info.push({name: "jier3", age: 26});
+                  // this.info[0] = {name: "jier3", age: 26}
+                }
+            },
+            // computed本身 就是一个Obj
+            computed: {
+              fullName() {
+                return this.firstName + " " + this.lastName
+              },
+              scoreLevel() {
+                return this.score >= 90 ? "good" : "enough";
+              },
+              reverseMessage() {
+                return this.message.split(" ").reverse().join(" ");
+              }
+            },
+            watch: {
+              // additional 监听 指定的元素, 现在监听 data里面的 message
+              message(newValue, oldValue) {
+                // newValue, oldValue 都是 代理对象 proxy
+                console.log(oldValue + "======>" + newValue);
+                // 我们想要拿到原始的对象。
+                console.log(Vue.toRaw(newValue));
+              },
+              // watch只是监听info 的引用变化， 而对于内部的 内容变化 无感知
+              // info() {
+              //   alert("info 发生了改变");
+              //   console.log("info 发生了改变");
+              // }
+              info: {
+                handler(newValue, oldValue) {
+                  console.log("info 发生了改变: "+ Vue.toRaw(newValue));
+                },
+                deep: true,
+                // 第一次加载的时候， 也执行(第一次 渲染的时候， 发送一次网络请求后)
+                immediate: true
+              }
+
+            }
+        })
+        app.mount("#app")
+    </script>
+</body>
+</html>
