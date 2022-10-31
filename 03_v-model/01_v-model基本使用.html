@@ -8,7 +8,49 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" :value="defaultText">
+      <!-- v-model 的原理 -->
+      <input type="text" :value="message" @input="inputFunc">
+
+
+
+      <!-- 双向绑定， input 的 value 发生改变的时候， message也会 改变 -->
+      <!-- 可以方便地 将用户输入的东西 绑入 到 变量中 -->
+        <input type="text" v-model="message">
+        <h2>{{message}}</h2>
+
+        <!-- 登陆 功能 -->
+        <div>
+          <label for="username">
+              登陆<input id="username" type="text" v-model="username">
+          </label>
+          <label for="pwd">
+              密码<input id="pwd" type="password" v-model="pwd">
+          </label>
+          <button @click="btnClick">login</button>
+        </div>
+
+        <!-- 演示 绑定 textarea -->
+        <div>
+          <textarea name="" id="" v-model="content" cols="30" rows="10"></textarea>
+          <p>输入的内容是：{{content}}</p>
+
+        </div class="hobbies">
+
+        <!-- 演示绑定 checkbox 的情况 ,  必须在每一条上面 加上value值-->
+          <label for="sing">
+            <input id="sing" type="checkbox" v-model="hobbies" value="I can sing">同意
+          </label>
+          <label for="jump">
+            <input id="jump" type="checkbox" v-model="hobbies" value="I can jump">同意
+          </label>
+          <label for="rap">
+            <input id="rap" type="checkbox" v-model="hobbies" value="I can rap">同意
+          </label>
+          <label for="basketball">
+            <input id="basketball" type="checkbox" v-model="hobbies" value="I can basketball">同意
+          </label>
+          <h2>{{hobbies}}</h2>
+        </div>
     </div>
 
     <script src="./lib/vue.js"></script>
@@ -16,13 +58,25 @@
         const app = Vue.createApp({
             data() {
                 return ({
-                    defaultText: "hello v-modle"
+                    message: "hello v-modle",
+                    username: "",
+                    pwd: "",
+
+                    content: "",
+                    hobbies: []
+
                 })
             },
             methods: {
                 function1: function() {
                     console.log("here is something");
                 },
+                inputFunc(event) {
+                  this.message = event.target.value
+                },
+                btnClick() {
+                  console.log(this.username + "+" + this.pwd);
+                }
             }
         })
         app.mount("#app")
