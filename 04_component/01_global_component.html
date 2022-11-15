@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .product {
+        background-color: pink;
+      }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--  use my diy component "nav" -->
+        <my_nav></my_nav>
+        <!-- 使用自己定义的 组件 -->
+        <product-item></product-item>
+        <product-item></product-item>
+        <product-item></product-item>
+        <product-item></product-item>
+    </div>
+
+    <template id="my_nav">
+      <div class="my_nav">
+        <h2>this is the nav</h2>
+      </div>
+    </template>
+
+    <!-- 定义 这个组件的 html 部分 -->
+    <template id="product">
+      <div class="product">
+        <h2>{{title}}</h2>
+        <p>product desc</p>
+        <p>price: 9.9</p>
+      </div>
+      <button @click="saveTocart">save</button>
+    </template>
+
+
+    <script src="./lib/vue.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return ({
+                    message: "hello Vue"
+                })
+            },
+            methods: {
+                function1: function() {
+                    console.log("here is something");
+                },
+            }
+        })
+
+        // 注册一个全局的组件(component)
+        app.component("product-item", {
+          template: "#product",
+          data() {
+            return {
+              title: "I am the title of this product"
+            }
+          },
+          methods: {
+            saveTocart() {
+              console.log("save to cart");
+            }
+          }
+        })
+
+        // register a diy nav
+        app.component("my_nav", {
+          template: "#my_nav"
+        })
+
+
+
+
+        app.mount("#app")
+    </script>
+</body>
+</html>

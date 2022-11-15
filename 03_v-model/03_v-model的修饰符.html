@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="app">
-      <!-- lazy 绑定， 回车的时候 才同步 -->
+      <!-- lazy 绑定， 回车的时候 才同步，要不然 输入一个字符， 就会同步一次， 不好。 -->
       <label for="message">
          <input type="text" id="message" v-model.lazy="message">
       </label>
