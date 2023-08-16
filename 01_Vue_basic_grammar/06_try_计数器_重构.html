@@ -24,7 +24,7 @@
             methods: {
                 decrement: function() {
                     console.log("function1 is clicked");
-                    this.counter--
+                    this.counter > 0 ? this.counter--: this.counter
                 },
                 increment: function() {
                     this.counter++

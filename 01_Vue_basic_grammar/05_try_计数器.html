@@ -17,7 +17,7 @@
                 <button @click="decrement">-</button>
                 <button @click="increment">+</button>
             `,
-            data() {   // 省略了 function()
+            data: function() {   // 省略了 function()
                 return ({
                     counter: 0
                 })
@@ -25,7 +25,7 @@
             methods: {
                 decrement: function() {
                     console.log("function1 is clicked");
-                    this.counter--
+                    this.counter > 0 ? this.counter--: this.counter
                 },
                 increment: function() {
                     this.counter++
@@ -38,6 +38,6 @@
     </script>
 
 
-    
+
 </body>
 </html>
