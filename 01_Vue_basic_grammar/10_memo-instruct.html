@@ -13,10 +13,10 @@
         <div v-memo="[name]">
            <h2>name: {{name}}</h2>
             <h2>age: {{age}}</h2>
-            <h2>mesage: {{message}}</h2> 
+            <h2>mesage: {{message}}</h2>
         </div>
         <button @click="updateInfo">update Info</button>
-        
+
     </div>
 
     <script src="./lib/vue.js"></script>
@@ -35,7 +35,8 @@
                 },
                 updateInfo() {
                     this.message = "jier"
-                    this.name = "no Vue"
+                    // this.name = "no Vue"
+                    this.name = "no Vue" //假如你 name 不 update 的话： 那么 其他的数据也不会update， 因为 <div v-memo="[name]">
                 }
             }
         })

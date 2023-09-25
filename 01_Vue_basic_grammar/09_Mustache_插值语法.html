@@ -20,9 +20,10 @@
         <h2 v-text="message"></h2>
         <!-- 把 html 放进去 -->
         <h2 v-html="html1"></h2>
+        <!--The split() method is a method of the String object in JavaScript that divides a string into an ordered set of substrings, puts these substrings into an array, and returns the array  -->
         <h2>{{message.split(" ")}}</h2>
         <h2>{{counter * 2}}</h2>
-        <!-- 我就想显示 两个 {{}} -->
+        <!-- 我就想显示 两个 {{}} 括号，没有其他的意思-->
         <p v-pre>{{}}</p>
         <!--不重要 ！！！ v-cloak 等你渲染完事 之后， 我再显示 , 要 和 css 一起使用： 网速慢 的情况下 ， vue会之后 把 斗篷删掉-->
         <h2 v-cloak>{{message}}</h2>

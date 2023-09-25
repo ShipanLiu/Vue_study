@@ -1,6 +1,4 @@
-// 利用网站 ： https://snippet-generator.app/
-
-
+<!-- 利用网站 ： https://snippet-generator.app/ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +9,9 @@
 </head>
 <body>
     <div id="app">
-        <h2></h2>
+        <h2>{{message}}</h2>
+        <button @click="function1">click me</button>
+        <button @click="function2">click me2</button>
     </div>
 
     <script src="./lib/vue.js"></script>
@@ -25,6 +25,9 @@
             methods: {
                 function1: function() {
                     console.log("here is something");
+                },
+                function2() {
+                    console.log("ri gou");
                 },
             }
         })

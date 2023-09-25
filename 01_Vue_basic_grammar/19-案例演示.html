@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 
     click the button, the picture disappears, click again, picture back
     这是一种思想的转变
@@ -26,6 +26,10 @@
         <div>
             <button @click="btnClick">点击</button>
         </div>
+        <!--
+          v-if 是一个指令： 我们希望切换的是 多个元素， 但是我们不希望 加在 div 上面，
+          所以 就使用 template
+         -->
         <template v-if="ifShowImg">
             <div>
                 <img src="https://media-image1.baydn.com/account/c904ba90e41ac6beadd8cdf4faa33bd295e44c5a5a58b7a0eda829806acc58e6.png" alt="no img">

@@ -17,6 +17,12 @@
 
     <script>
         // 获取 DOM
+        /*
+        document.querySelector() only returns the first element that matches the specified selectors. If you want to select all matching elements, you should use document.querySelectorAll(), which returns a NodeList of all matching element
+
+        It's worth noting that document.querySelector() is more versatile than older methods like getElementById(), getElementsByClassName(), and getElementsByTagName() because it allows for more complex and combined CSS selectors.
+
+        */
         const h2Tag = document.querySelector("h2")
         const counterTag = document.querySelector(".counter")
         const addTag = document.querySelector(".add")
