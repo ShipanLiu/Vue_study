@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>Self Service Order</title>
+    </head>
+
+    <body>
+
+        <main id="app">
+            <section class="items">
+                <h4>Pick your items jier</h4>
+                <!-- toggleActive(product) 还传递了参数 -->
+                <!-- 写法一：  :class="{selected: product.active}" 使用这个写法-->
+                <!-- 写法二： :class="product.active ? 'selected' : ''" -->
+                <div v-for="product in products"
+                    class="product"
+                    @click="toggleActive(product)"
+                    :class="{selected: product.active}"
+                    >
+
+                    <div class="photo">
+                        <!-- 重要： :src 告诉：我是dynamic， in attribute we use " " but not {{}} -->
+                        <img :src="product.photo">
+                    </div>
+                    <div class="description">
+                        <span class="name">{{product.name}}</span>
+                        <span class="price">$ {{product.price}}</span>
+                        <div class="quantity-area">
+                          <!-- the button will only appear if the item is selected -->
+                          <!-- <template> 标签定义在页面加载时隐藏的一些内容，该标签中的内容可以稍后使用 JavaScript 呈现。 -->
+                            <template v-if="product.active">
+                                <!--.stop means to stop the propogation  ==> clicking the buton will not toggle the border which belongs to the parent  -->
+                                <button :disabled="product.quantity<=1" @click.stop="product.quantity--">-</button>
+                                <span class="quantity">{{product.quantity}}</span>
+                                <button @click.stop="product.quantity++">+</button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="summary" v-if="total()>0">
+                <strong>Order Details</strong>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="product in products">
+                            <!-- the reason why we use template is bacause we don't want to ruin the CSS,  template tag ius ignored while loading the HTML file-->
+                            <template v-if="product.active">
+                                <td>{{product.quantity + 'x ' + product.name}}</td>
+                                <!-- toFixed will return a string back -->
+                                <td>{{(product.quantity * product.price).toFixed(2)}}</td>
+                            </template>
+                        </tr>
+
+                        <tr>
+                            <th>Total</th>
+                            <!-- total() 立刻调用 -->
+                            <th>{{total()}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="scripts.js"></script>
+    </body>
+
+</html>

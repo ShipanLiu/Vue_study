@@ -8,15 +8,17 @@
 </head>
 <body>
     <div id="app">
-      <!-- v-model 的原理 -->
-      <input type="text" :value="message" @input="inputFunc">
+        <!-- v-model 的原理 -->
+        <input type="text" :value="message" @input="inputFunc">
+        <!-- @input: This is shorthand for v-on:input, which is Vue's event directive to listen to the input event on the element. The input event is fired
+        input 就相当于 click event 一样， 一旦input了 就会调用 inputFunc 这个函数-->
 
 
 
       <!-- 双向绑定， input 的 value 发生改变的时候， message也会 改变 -->
       <!-- 可以方便地 将用户输入的东西 绑入 到 变量中 -->
-        <input type="text" v-model="message">
-        <h2>{{message}}</h2>
+        <input type="text" v-model="message">  <!--上面的nput 输入什么，这里就会显示什么-->>
+        <h2>{{message}}</h2> <!--上面的nput 输入什么，这里就会显示什么-->>
 
         <!-- 登陆 功能 -->
         <div>
