@@ -1,0 +1,5 @@
+here:
+
+input,
+v-model ==> 2 way binding
+button @click
