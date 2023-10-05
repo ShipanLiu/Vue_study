@@ -2,13 +2,21 @@
   <div class="home">
     <div class="products">
       <div
-      v-for="(pro, index) in this.products"
+      v-for="(pro, index) in products"
       :key="index"
-      class="product">
-          <div class="product-image" :style="{backgroundImage: 'url(' + pro.images[Math.floor(Math.random()*(pro.images.length))] + ')'}"></div>
+      class="product"
+      :class="{inBag: proIsInBag(pro)}"
+      >
+        <div class="product-image" :style="{backgroundImage: 'url(' + pro.images[Math.floor(Math.random()*(pro.images.length))] + ')'}"></div>
         <h4>{{ pro.description.substring(0, 20) }}</h4>
         <p class="price">US$ {{ pro.price.toFixed(2) }}</p>
-        <button @click="addToBag(pro)">Add to bag</button>
+        <!-- if the pro is in basket, then let the button disappear -->
+        <button v-if="!proIsInBag(pro)" @click="addToBag(pro)">Add to bag</button>
+        <template v-else>
+          <p class="basket-info">this item is added into the basket</p>
+          <button @click="removeFromBasket(pro.id)" class="remove">remove from baskket</button>
+        </template>
+
       </div>
     </div>
   </div>
@@ -23,12 +31,14 @@ export default {
     }
   },
 
+  // 可以使用 mapState 来简化从 store 里面取 data
   computed: {
     // get the data from store（但是不能直接 save data to store， 是单向的）
     // 为什么不在data 中,而是在 computed？ 因为 this.$store.state.products 有初始值， 但是之后被更新了成api的数据。我们需要最新的值
     products() {
       return this.$store.state.products;
     },
+    //this computed attribute is read only
     productsInBag() {
       return this.$store.state.productsInBag;
     },
@@ -40,14 +50,22 @@ export default {
       // 给这个pro加上一个 "quantity" 的 key
       pro.quantity = 1;
       console.log(pro);
+      console.log(this.productsInBag);
       // now is time to update the store using by dispatching action
       this.$store.dispatch("addToBag", pro);
     },
 
     // check if the product is added into the bag and disable the add button
+    // *****if "productsInBag" property in store changes, any computed property or method in the Vue component that depends on that state property will be re-evaluated.
     proIsInBag(pro) {
-      // if(this.productsInBag.)
-    }
+      return this.productsInBag.find(item => item.id == pro.id) ? true : false;
+    },
+
+    // use filter method
+    removeFromBasket(proId) {
+      // now upstate "state" in store
+      this.$store.dispatch("removeProductsInBag", proId);
+    },
 
   }
 }
@@ -125,7 +143,7 @@ export default {
           &:hover {
             opacity: 0.2;
           }
-
+          //The & symbol is a reference to the parent selector within nested rules.
           &.remove {
             background-color: transparent;
             border: none;
@@ -133,6 +151,12 @@ export default {
             text-decoration: underline;
           }
         }
+
+        p.basket-info {
+          color: red;
+        }
+
+
       }
     }
 

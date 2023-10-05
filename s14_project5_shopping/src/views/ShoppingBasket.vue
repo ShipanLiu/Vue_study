@@ -1,36 +1,64 @@
 <template>
   <div class="basket">
-    <div class="items">
-
-      <div class="item">
-        <div class="remove">Remove item</div>
-        <div class="photo"><img src="https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg" alt=""></div>
-        <div class="description">Mens Casual Premium Slim Fit T-Shirts </div>
-        <div class="price">
-          <span class="quantity-area">
-            <button disabled="">-</button>
-            <span class="quantity">1</span>
-            <button>+</button>
-          </span>
-          <span class="amount">US$ 22.30</span>
+    <!-- or you can use v-if="basketItems.length" -->
+    <template v-if="basketLength">
+      <div class="items">
+        <div
+        v-for="(pro, index) in basketItems"
+        :key="index"
+        class="item">
+          <div @click="removePro(pro.id)" class="remove">Remove item</div>
+          <div class="photo"><img :src="pro.images[Math.floor(Math.random()*(pro.images.length))]" alt="not found image"></div>
+          <div class="description">{{ pro.description.substring(0, 20) }}</div>
+          <div class="price">
+            <span class="quantity-area">
+              <button @click="pro.quantity--" :disabled="pro.quantity <= 1">-</button>
+              <span class="quantity">{{ pro.quantity }}</span>
+              <button @click="pro.quantity++">+</button>
+            </span>
+            <span class="amount">US$ {{ (pro.price * pro.quantity ).toFixed(2) }}</span>
+          </div>
         </div>
+        <div class="grand-total"> Grand Total: {{ calcTotal() }}</div>
       </div>
-      <div class="grand-total"> Grand Total: US$ 22.30</div>
+    </template>
 
-    </div>
+    <template v-else>
+      <h4>no items in basket yet</h4>
+    </template>
   </div>
 </template>
 
 <script>
 
+import { mapState , mapGetters} from 'vuex';
+
 export default {
   name: 'ShoppingBasket',
 
   computed: {
+    ...mapGetters({
+      basketLength: "basketLength"
+    }),
+
+    ...mapState({
+    basketItems: "productsInBag",
+  })
   },
 
   methods: {
 
+    removePro(proId) {
+      this.$store.dispatch("removeProductsInBag", proId);
+    },
+
+    calcTotal() {
+      // forEach 比 reduce 更容易懂
+      return this.basketItems.reduce((priceSum, pro) => {
+        priceSum += pro.price * pro.quantity;
+        return priceSum;
+      }, 0).toFixed(2);
+    }
   },
 
 }

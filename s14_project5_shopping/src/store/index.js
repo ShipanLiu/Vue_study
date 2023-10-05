@@ -11,7 +11,19 @@ export default createStore({
     products: [],
     // shopping basket
     productsInBag: [],
+  },
 
+  // You can think of getters as computed properties for the store's state,
+  // 可以看成 getter 就是 state的 进一步细化，state 一变， getter 就会也变， 相当于 computed
+  getters: {
+    //if anything in the productsInBag array changes, the computed value of basketLength (as you've defined it in the getters) will be re-evaluated, and its value will update accordingly.
+    basketLength: (state) => {
+      // here use reduce() or forEach() better than filter(), becuase filter() returns a new array, which we don't need here
+      return state.productsInBag.reduce((itemSum, pro) => {
+        itemSum += pro.quantity
+        return itemSum;
+      }, 0);
+    },
   },
 
   // calling a "mutation" outside you need to use "commit()"
@@ -24,7 +36,11 @@ export default createStore({
     //第一个参数永远是 state
     addToBag(state, pro) {
       state.productsInBag.push(pro);
-    }
+    },
+
+    removeProductsInBag(state, proId) {
+      state.productsInBag = state.productsInBag.filter(item => item.id != proId);
+    },
   },
 
   // calling an "action" outside you need to use "dispatch()"
@@ -44,7 +60,17 @@ export default createStore({
     // add to Basket action(参数 "pro" 传进来了)
     addToBag({ commit}, pro) {
       commit("addToBag", pro); // 把任务交给 mutation "addToBag"
-    }
+    },
+
+    removeProductsInBag({ commit }, proId) {
+      // 注意 alter action 最好在 store 里面写
+      if(confirm("are you sure you want to remove the item from basket")) {
+        commit("removeProductsInBag", proId);
+      } else {
+        alert("item satys in basket, 又花钱了");
+      }
+    },
+
 
   },
   modules: {
