@@ -20,6 +20,8 @@
     created() {
       // dispatch and invoke "loadProducts" actions from store
       this.$store.dispatch('loadProducts');
+      // load the saved products from localStorage
+      this.$store.dispatch("loadBag");
     },
 
     computed: {

@@ -18,6 +18,8 @@ export default createStore({
   getters: {
     //if anything in the productsInBag array changes, the computed value of basketLength (as you've defined it in the getters) will be re-evaluated, and its value will update accordingly.
     basketLength: (state) => {
+      // 每一次点击minusProQuantity() 和 plusProQuantity()时候， state.productsInBag 会变化， basketLength 会被computed again， 正好利用这个机会来更新localStorage
+      localStorage.setItem("basket", JSON.stringify(state.productsInBag));
       // here use reduce() or forEach() better than filter(), becuase filter() returns a new array, which we don't need here
       return state.productsInBag.reduce((itemSum, pro) => {
         itemSum += pro.quantity
@@ -28,18 +30,25 @@ export default createStore({
 
   // calling a "mutation" outside you need to use "commit()"
   mutations: {
-    loadProducts(state, pro) {
+    loadProducts(state, pros) {
       // 这里的state，就是上面的 state
-      state.products = pro;
+      state.products = pros;
+    },
+
+    loadBag(state, basketDataFromLocalStorage) {
+      state.productsInBag = basketDataFromLocalStorage;
+      localStorage.setItem("basket", JSON.stringify(state.productsInBag));
     },
 
     //第一个参数永远是 state
     addToBag(state, pro) {
       state.productsInBag.push(pro);
+      localStorage.setItem("basket", JSON.stringify(state.productsInBag));
     },
 
     removeProductsInBag(state, proId) {
       state.productsInBag = state.productsInBag.filter(item => item.id != proId);
+      localStorage.setItem("basket", JSON.stringify(state.productsInBag));
     },
   },
 
@@ -48,13 +57,27 @@ export default createStore({
     // API data ====save to ===>  store  need "action" + "mutation"
     // the commit param is for invoking the "mutation"
     loadProducts({ commit }) {
-      axios
-      .get("https://api.escuelajs.co/api/v1/products")
-      .then((res) => {
-        // console.log(res.data)
-        // the "mutation" better has the same name as "action"
-        commit('loadProducts', res.data);
-      })
+      //check if localStorage saved, then don't request again
+      if(localStorage.getItem("products")) {
+        commit('loadProducts', JSON.parse(localStorage.getItem("products")));
+      } else {
+        axios
+        .get("https://api.escuelajs.co/api/v1/products")
+        .then((res) => {
+          // console.log(res.data)
+          // the "mutation" better has the same name as "action"
+          localStorage.setItem("products", JSON.stringify(res.data));
+          commit('loadProducts', res.data);
+        })
+      }
+
+    },
+
+    loadBag({ commit }) {
+      // check anything in the localStorage
+      if(localStorage.getItem("basket")) {
+        commit("loadBag", JSON.parse(localStorage.getItem("basket")));
+      }
     },
 
     // add to Basket action(参数 "pro" 传进来了)
