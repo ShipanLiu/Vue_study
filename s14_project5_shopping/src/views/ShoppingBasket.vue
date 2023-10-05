@@ -12,9 +12,9 @@
           <div class="description">{{ pro.description.substring(0, 20) }}</div>
           <div class="price">
             <span class="quantity-area">
-              <button @click="pro.quantity--" :disabled="pro.quantity <= 1">-</button>
+              <button @click="minusProQuantity(pro)" :disabled="pro.quantity <= 1">-</button>
               <span class="quantity">{{ pro.quantity }}</span>
-              <button @click="pro.quantity++">+</button>
+              <button @click="plusProQuantity(pro)">+</button>
             </span>
             <span class="amount">US$ {{ (pro.price * pro.quantity ).toFixed(2) }}</span>
           </div>
@@ -60,6 +60,14 @@ export default {
       }, 0).toFixed(2);
     }
   },
+
+  minusProQuantity(pro) {
+    pro.quantity--;
+  },
+
+  plusProQuantity(pro) {
+    pro.quantity++;
+  }
 
 }
 </script>
