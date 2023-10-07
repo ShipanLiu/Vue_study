@@ -1,42 +1,57 @@
 <script setup>
+  //ref is only for primitives(value, string, boolean)
+  //"reactive" is for (Objects, arrays)
+  import { ref, reactive } from 'vue';
 
-const tasks= [
-    {
-      name: "Website design",
-      description: "Define the style guide, branding and create the webdesign on Figma.",
-      completed: true
-    },
-    {
-      name: "Website development",
-      description: "Develop the portfolio website using Vue JS.",
-      completed: false
-    },
-    {
-      name: "Hosting and infrastructure",
-      description: "Define hosting, domain and infrastructure for the portfolio website.",
-      completed: false
-    },
-    {
-      name: "Composition API",
-      description: "Learn how to use the composition API and how it compares to the options API.",
-      completed: true
-    },
-    {
-      name: "Pinia",
-      description: "Learn how to setup a store using Pinia.",
-      completed: true
-    },
-    {
-      name: "Groceries",
-      description: "Buy rice, apples and potatos.",
-      completed: false
-    },
-    {
-      name: "Bank account",
-      description: "Open a bank account for my freelance business.",
-      completed: false
-    }
-];
+  const appName = ref("My new task manager");
+
+  // if you want to change the "appName"
+  appName.value = "jier";
+
+
+  const tasks= reactive([
+
+
+      {
+        name: "Website design",
+        description: "Define the style guide, branding and create the webdesign on Figma.",
+        completed: true
+      },
+      {
+        name: "Website development",
+        description: "Develop the portfolio website using Vue JS.",
+        completed: false
+      },
+      {
+        name: "Hosting and infrastructure",
+        description: "Define hosting, domain and infrastructure for the portfolio website.",
+        completed: false
+      },
+      {
+        name: "Composition API",
+        description: "Learn how to use the composition API and how it compares to the options API.",
+        completed: true
+      },
+      {
+        name: "Pinia",
+        description: "Learn how to setup a store using Pinia.",
+        completed: true
+      },
+      {
+        name: "Groceries",
+        description: "Buy rice, apples and potatos.",
+        completed: false
+      },
+      {
+        name: "Bank account",
+        description: "Open a bank account for my freelance business.",
+        completed: false
+      }
+  ]);
+
+
+
+
 
 </script>
 
@@ -46,11 +61,11 @@ const tasks= [
     <div class="header">
       <div class="header-side">
         <h1>
-          Tasks Manager
+          {{ appName }}
         </h1>
       </div>
     </div>
-    
+
     <div class="filters">
       <div>
         <p>Filter by state</p>
@@ -69,8 +84,11 @@ const tasks= [
     </div>
 
     <div class="tasks">
-      
-      <div class="task">
+
+      <div
+      v-for="(t, index) in tasks"
+      :key="index"
+      class="task">
         <h3>
           Website design
         </h3>
@@ -84,22 +102,6 @@ const tasks= [
           </label>
         </div>
       </div>
-
-      <div class="task">
-        <h3>
-          Website development
-        </h3>
-        <p>
-          Develop the portfolio website using Vue JS.
-        </p>
-        <div class="task-check">
-          <input type="checkbox"/>
-          <label>
-            To-Do
-          </label>
-        </div>
-      </div>
-
     </div>
 
     <div class="add-task">
@@ -111,8 +113,8 @@ const tasks= [
     </div>
 
   </main>
-  
-   
+
+
 
 </template>
 
