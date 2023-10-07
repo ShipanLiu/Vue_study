@@ -90,15 +90,15 @@
       :key="index"
       class="task">
         <h3>
-          Website design
+          {{ t.name }}
         </h3>
         <p>
-          Define the style guide, branding and create the webdesign on Figma.
+          {{ t.description }}
         </p>
         <div class="task-check">
           <input type="checkbox" checked />
           <label>
-            Done
+            {{ t.completed }}
           </label>
         </div>
       </div>
