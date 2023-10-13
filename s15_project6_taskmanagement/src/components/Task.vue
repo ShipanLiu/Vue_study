@@ -1,5 +1,6 @@
 <script setup>
 // father给了你 task， 你可以把 task 展示。
+// we won't use variable "props" directly, but just use "task" variable
 const props = defineProps(['task']);
 
 </script>

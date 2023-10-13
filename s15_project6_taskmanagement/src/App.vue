@@ -1,16 +1,19 @@
 <script setup>
   //ref is only for primitives(value, string, boolean)
   //"reactive" is for (Objects, arrays)
-  import { ref, reactive } from 'vue';
+  import { ref, reactive, computed } from 'vue';
   import Task from './components/Task.vue';
+  import Filter from './components/Filter.vue';
+  import ModelWindow from './components/Filter.vue';
 
+
+
+  /*==============> Variables <==============*/
   const appName = ref("My new task manager");
-
   // if you want to change the "appName"
-  appName.value = "jier";
+  appName.value = "Shipan's Tasks Management";
 
   let tasks= reactive([
-
 
       {
         name: "Website design",
@@ -60,6 +63,25 @@
     completed: false,
   };
 
+  let filterBy = ref("");
+
+  // I want if the "filterBy.value" changes, I need to reactively get the latest "filteredTasks"
+  const filteredTasks = computed(() => {
+    switch(filterBy.value) {
+      case "todo":
+        return tasks.filter(t => !t.completed);
+        break;
+      case "done":
+        return tasks.filter(t => t.completed);
+        break;
+      default:
+        // by default just return the original tasks array
+        return tasks;
+    }
+  });
+
+  /*==============> Functions <==============*/
+
   function addTask() {
     if(newTask.name && newTask.description) {
       // find the biggest id and create a new id
@@ -74,23 +96,33 @@
   }
 
   function toggleCompleteFunc(taskId) {
-    let tagetTask = tasks.find(t => t.id == taskId);
-    console.log(taskId);
-    // if(tagetTask) {
-    //   console.log(targetTask.completed);
-    //   tagetTask.completed = !targetTask.completed;
-    //   console.log(targetTask.completed);
-    // } else {
-    //   alert("the id does not exist");
-    // }
+    let targetTask = tasks.find(t => t.id === taskId);
+    if(targetTask) {
+      console.log(targetTask.completed);
+      targetTask.completed = !targetTask.completed;
+      console.log(targetTask.completed);
+    } else {
+      alert("the id does not exist");
+    }
+  }
+
+  // a function that be able to set the filter
+  function setFilter(value) {
+    console.log(value);
+    // if you want to resign value to a reactive variable, you need to use ".value" grammar
+    filterBy.value = value;
   }
 
 
 </script>
 
+
+<!-- ==============> Templates <============== -->
+
 <template>
 
   <main class="container">
+
     <div class="header">
       <div class="header-side">
         <h1>
@@ -99,39 +131,20 @@
       </div>
     </div>
 
-    <div class="filters">
-      <div>
-        <p>Filter by state</p>
-        <div class="badges">
-          <div class="badge">
-            To-Do
-          </div>
-          <div class="badge">
-            Done
-          </div>
-          <span class="clear">
-            x clear
-          </span>
-        </div>
-      </div>
-    </div>
+    <Filter :filterBy="filterBy" @emitSetFilterBy="setFilter" @emitClearFilterby="setFilter"/>
 
     <div class="tasks">
+      <Task @toggleCompleteEmit="toggleCompleteFunc" v-for="(t, index) in filteredTasks" :task="t" :key="index"></Task>
+    </div>
 
-    <Task @toggleCompleteEmit="toggleCompleteFunc" v-for="(t, index) in tasks" :task="t" :key="index"></Task>
-
-      <div class="add-task">
-        <h3>Add a new task</h3>
-        <input v-model="newTask.name" type="text" name="title" placeholder="Enter a title..."><br />
-        <textarea v-model="newTask.description" name="description" rows="4" placeholder="Enter a description..." /><br />
-        <button @click="addTask" class="btn gray">Add Task</button>
-
-      </div>
+    <div class="add-task">
+      <h3>Add a new task</h3>
+      <input v-model="newTask.name" type="text" name="title" placeholder="Enter a title..."><br />
+      <textarea v-model="newTask.description" name="description" rows="4" placeholder="Enter a description..." /><br />
+      <button @click="addTask" class="btn gray">Add Task</button>
     </div>
 
   </main>
-
-
 
 </template>
 
@@ -163,37 +176,6 @@
 
 }
 
-.filters {
-  display: flex;
-  flex-direction: column;
-  margin: 40px 0;
-
-  p {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 14px 0;
-    align-items: center;
-  }
-
-  .clear {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: 0em;
-    text-align: left;
-    cursor: pointer;
-  }
-
-}
 
 .tasks {
   display: grid;
