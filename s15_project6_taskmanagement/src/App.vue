@@ -4,8 +4,8 @@
   import { ref, reactive, computed } from 'vue';
   import Task from './components/Task.vue';
   import Filter from './components/Filter.vue';
-  import ModelWindow from './components/Filter.vue';
-
+  import ModelWindow from './components/modal/ModelWindow.vue';
+  import AddTask  from './components/modal/AddTask.vue';
 
 
   /*==============> Variables <==============*/
@@ -64,6 +64,12 @@
   };
 
   let filterBy = ref("");
+
+  // create a ref for modal open/close
+  let modalIsActive = ref(false);
+
+
+    /*==============> Computed <==============*/
 
   // I want if the "filterBy.value" changes, I need to reactively get the latest "filteredTasks"
   const filteredTasks = computed(() => {
@@ -129,6 +135,9 @@
           {{ appName }}
         </h1>
       </div>
+      <div class="header-side">
+        <button class="btn secondary" @click="modalIsActive = true">+ Add Task</button>
+      </div>
     </div>
 
     <Filter :filterBy="filterBy" @emitSetFilterBy="setFilter" @emitClearFilterby="setFilter"/>
@@ -137,12 +146,10 @@
       <Task @toggleCompleteEmit="toggleCompleteFunc" v-for="(t, index) in filteredTasks" :task="t" :key="index"></Task>
     </div>
 
-    <div class="add-task">
-      <h3>Add a new task</h3>
-      <input v-model="newTask.name" type="text" name="title" placeholder="Enter a title..."><br />
-      <textarea v-model="newTask.description" name="description" rows="4" placeholder="Enter a description..." /><br />
-      <button @click="addTask" class="btn gray">Add Task</button>
-    </div>
+    <ModelWindow v-if="modalIsActive" @closeModalWindow="modalIsActive = false">
+      <!-- everything here will be transferred to the “slot” inside of “ModelWindow” -->
+      <AddTask/>
+    </ModelWindow>
 
   </main>
 
