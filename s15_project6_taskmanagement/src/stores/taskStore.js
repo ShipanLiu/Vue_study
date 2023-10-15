@@ -2,61 +2,65 @@
 this is a subject under "stores", so everything related to tasks will be here
 命名规则: "use" + "store_name" + "Store" ,   example:  useAlertsStore
 
+
+ // {
+    //   name: "Website design",
+    //   description: "Define the style guide, branding and create the webdesign on Figma.",
+    //   completed: true,
+    //   id: 1
+    // },
+    // {
+    //   name: "Website development",
+    //   description: "Develop the portfolio website using Vue JS.",
+    //   completed: false,
+    //   id: 2
+    // },
+    // {
+    //   name: "Hosting and infrastructure",
+    //   description: "Define hosting, domain and infrastructure for the portfolio website.",
+    //   completed: false,
+    //   id: 3
+    // },
+    // {
+    //   name: "Composition API",
+    //   description: "Learn how to use the composition API and how it compares to the options API.",
+    //   completed: true,
+    //   id: 4
+    // },
+    // {
+    //   name: "Pinia",
+    //   description: "Learn how to setup a store using Pinia.",
+    //   completed: true,
+    //   id: 5
+    // },
+    // {
+    //   name: "Groceries",
+    //   description: "Buy rice, apples and potatos.",
+    //   completed: false,
+    //   id: 6
+    // },
+    // {
+    //   name: "Bank account",
+    //   description: "Open a bank account for my freelance business.",
+    //   completed: false,
+    //   id: 7
+    // }
+
 */
 
 import {defineStore} from 'pinia';
 import {ref, reactive, computed} from 'vue';
 // use data from "modalStore.js"
-// import {useModalStore} from '@/stores/modalStore.js'
-// const modalStore = useModalStore();
+import {useModalStore} from '@/stores/modalStore.js'
 
 
 // here 'tasks' is a unique id across the application
 export const useTasksStore = defineStore('tasks', () => {
-  let tasks = reactive([
-    {
-      name: "Website design",
-      description: "Define the style guide, branding and create the webdesign on Figma.",
-      completed: true,
-      id: 1
-    },
-    {
-      name: "Website development",
-      description: "Develop the portfolio website using Vue JS.",
-      completed: false,
-      id: 2
-    },
-    {
-      name: "Hosting and infrastructure",
-      description: "Define hosting, domain and infrastructure for the portfolio website.",
-      completed: false,
-      id: 3
-    },
-    {
-      name: "Composition API",
-      description: "Learn how to use the composition API and how it compares to the options API.",
-      completed: true,
-      id: 4
-    },
-    {
-      name: "Pinia",
-      description: "Learn how to setup a store using Pinia.",
-      completed: true,
-      id: 5
-    },
-    {
-      name: "Groceries",
-      description: "Buy rice, apples and potatos.",
-      completed: false,
-      id: 6
-    },
-    {
-      name: "Bank account",
-      description: "Open a bank account for my freelance business.",
-      completed: false,
-      id: 7
-    }
-  ]);
+
+  // reload from localStorage
+  // ?. 代表你 "taskManageApp" 在 localStorage存在的时候，我才取你的 "tasks: key
+  let tasks = reactive(JSON.parse(localStorage.getItem("taskManageApp"))?.tasks || []);
+  console.log(tasks);
 
   let filterBy = ref("");
 
@@ -71,6 +75,7 @@ export const useTasksStore = defineStore('tasks', () => {
         return tasks.filter(t => t.completed);
       default:
         // by default just return the original tasks array
+        console.log("filteredTasks return tasks");
         return tasks;
     }
   });
@@ -85,14 +90,17 @@ export const useTasksStore = defineStore('tasks', () => {
    function addTask(newTask) {
     if(newTask.name && newTask.description) {
       // find the biggest id and create a new id
-      newTask.id = Math.max(...tasks.map(t => t.id)) + 1;
+      // 坑：注意假如 tasks 上来就是 空的 情况。
+      newTask.id = tasks.length ? (Math.max(...tasks.map(t => t.id)) + 1) : 1;
       tasks.push(newTask);
       // here you don't have to reset any more, because after the modal windows is destroyed, the Content will be cleaned.
       // newTask = {
       //   completed: false,
       // }
       // adding finished, close modal
-      // modalStore.closeModal();
+      // 在Pinia 立main使用另外一个 Pinia 的 store
+      const modalStore = useModalStore();
+      modalStore.closeModal();
     } else {
       alert("Both name and description are needed for creating a new task");
     }

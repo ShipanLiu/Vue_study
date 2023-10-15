@@ -8,13 +8,23 @@
   import ModelWindow from './components/modal/ModelWindow.vue';
   import AddTask  from './components/modal/AddTask.vue';
 
-  // use Pina
+  // use Pinia
   import {useTasksStore} from './stores/taskStore.js';
   import {useModalStore} from './stores/modalStore.js'
 
 
+
+
+
+
   /*==============> Variables <==============*/
   const store = useTasksStore();
+  // use Pinia and save to localStorage
+  store.$subscribe((mutation, state) => {
+    localStorage.setItem('taskManageApp', JSON.stringify(state));
+  })
+
+
   const modalStore = useModalStore();
 
   const appName = ref("My new task manager");
