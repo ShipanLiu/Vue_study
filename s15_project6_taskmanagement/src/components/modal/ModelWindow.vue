@@ -1,11 +1,13 @@
 <script setup>
 import ModalCloseButton from "./ModalCloseButton.vue"
+import {useModalStore} from '@/stores/modalStore.js'
+const modalStore = useModalStore();
 
 </script>
 <template>
   <div class="modal-wrapper" aria-modal="true" role="dialog" tabindex="-1">
       <div id="inner">
-        <ModalCloseButton @click="$emit('closeModalWindow')"/>
+        <ModalCloseButton @click="modalStore.closeModal()"/>
 
         <!-- 槽位，接受父亲传来的 template -->
         <!-- 这样的话， 你就可以复用 ModelWindow这个 component 了 -->

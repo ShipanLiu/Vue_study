@@ -1,5 +1,8 @@
 <script setup>
-const props = defineProps(['filterBy'])
+  // use Pina
+  import {useTasksStore} from '@/stores/taskStore.js';
+  const store = useTasksStore();
+
 </script>
 
 <template>
@@ -8,14 +11,14 @@ const props = defineProps(['filterBy'])
       <p>Filter by state</p>
       <div class="badges">
         <!-- emit an event and deliever it to the father -->
-        <div class="badge" :class="{selected: filterBy === 'todo'}" @click="$emit('emitSetFilterBy', 'todo')">
+        <div class="badge" :class="{selected: store.filterBy === 'todo'}" @click="store.setFilter('todo')">
           To-Do
         </div>
-        <div class="badge" :class="{selected: filterBy === 'done'}" @click="$emit('emitSetFilterBy', 'done')">
+        <div class="badge" :class="{selected: store.filterBy === 'done'}" @click="store.setFilter('done')">
           Done
         </div>
         <!-- we only see the "clear" only some filter method is selected -->
-        <span v-if="filterBy" class="clear" @click="$emit('emitClearFilterby', '')">
+        <span v-if="store.filterBy" class="clear" @click="store.setFilter('')">
           x clear
         </span>
       </div>

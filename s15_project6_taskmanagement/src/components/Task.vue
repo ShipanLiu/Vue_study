@@ -1,7 +1,13 @@
 <script setup>
 // father给了你 task， 你可以把 task 展示。
 // we won't use variable "props" directly, but just use "task" variable
-const props = defineProps(['task']);
+// 对于task 是 没有必要使用 Pinia 的
+  const props = defineProps(['task']);
+
+// 现在我们使用Pina
+  import {useTasksStore} from '@/stores/taskStore.js';
+  const store = useTasksStore();
+
 
 </script>
 
@@ -15,7 +21,7 @@ const props = defineProps(['task']);
     </p>
     <div class="task-check">
       <!-- 你的状态 要传给father，怎么办? 用emit event -->
-      <input type="checkbox" @click="$emit('toggleCompleteEmit', task.id)" :checked="task.completed" />
+      <input type="checkbox" @click="store.toggleCompleteFunc(task.id)" :checked="task.completed" />
       <label>
         {{task.completed ? "Done" : "To-Do"}}
       </label>
