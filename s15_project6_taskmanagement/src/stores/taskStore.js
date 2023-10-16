@@ -59,6 +59,7 @@ export const useTasksStore = defineStore('tasks', () => {
 
   // reload from localStorage
   // ?. 代表你 "taskManageApp" 在 localStorage存在的时候，我才取你的 "tasks: key
+  // "taskManageApp" 立面存了 "tasks" 和 “filterBy” 两个 key。 因为filteredTasks 是 computed， 所以不会被存下。
   let tasks = reactive(JSON.parse(localStorage.getItem("taskManageApp"))?.tasks || []);
   console.log(tasks);
 
