@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>CAD Floor Plan</title>
+</head>
+<body>
+    <svg id="drawingArea" width="1200" height="800"></svg>
+
+    <script src="floorplan.js" defer></script>
+    <script src="features.js" defer></script>
+    <script src="interactivity.js" defer></script>
+    <script>
+        window.onload = function() {
+            const svg = document.querySelector('#drawingArea');
+            drawFloorPlan(svg);
+            addFeatures(svg);
+            addInteractivity(svg);
+        }
+    </script>
+</body>
+</html>

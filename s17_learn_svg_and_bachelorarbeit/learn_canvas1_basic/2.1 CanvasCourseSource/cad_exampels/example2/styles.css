@@ -1,0 +1,38 @@
+.wall {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3;
+}
+
+.room {
+    fill: #e5e5e5;
+}
+
+.door {
+    fill: #ddd;
+    stroke: #000;
+    stroke-width: 2;
+}
+
+.window {
+    fill: #aaf;
+    stroke: #0077bb;
+    stroke-width: 2;
+}
+
+.dimension {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1;
+    stroke-dasharray: 4,4;
+}
+
+.dimension-text {
+    font-size: 12px;
+    fill: #000;
+}
+
+.annotation {
+    font-size: 14px;
+    fill: #000;
+}
