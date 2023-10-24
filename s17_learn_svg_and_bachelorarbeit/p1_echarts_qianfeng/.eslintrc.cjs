@@ -30,6 +30,5 @@ module.exports = {
     "vue/v-on-event-hyphenation": "off", // 可以使用 驼峰naming, not necessarily hyphen
     "no-console": "off", // because using console.log statements is generally discouraged in production code, as it could potentially leak sensitive information to the console,我这里允许使用console without getting a warning
     "vue/singleline-html-element-content-newline": "off", // 可以使用 <p>x</p> 不用x单独在一行
-    "space-before-function-paren": "off", // fun()  or  fun ()
   },
 };
