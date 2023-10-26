@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import restaurants from "@/data.json";
+import { useRestaurantsStore } from "@/stores/restaurantsStore"
 import RestaurantRow from "@/components/restaurant/RestaurantRow.vue"
+
+const restaurantsStore = useRestaurantsStore();
 
 // first table only show the first 25 restaurants
 // I don;t want the data to be reactive, so i don;t use "reactive" or "ref"
 const restaurantsOrganized = {
-  first: [...restaurants].splice(0, 25), // give me the first 25
-  second: [...restaurants].splice(25, 25), // start from index 25 and get the rest 25 data
+  first: [...restaurantsStore.restaurantsArr].splice(0, 25), // give me the first 25
+  second: [...restaurantsStore.restaurantsArr].splice(25, 25), // start from index 25 and get the rest 25 data
 };
 </script>
 

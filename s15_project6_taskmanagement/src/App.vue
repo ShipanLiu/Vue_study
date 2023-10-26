@@ -20,6 +20,7 @@
   /*==============> Variables <==============*/
   const store = useTasksStore();
   // use Pinia and save to localStorage
+  // to subscribe to store mutations and save the state to localStorage. 
   store.$subscribe((mutation, state) => {
     localStorage.setItem('taskManageApp', JSON.stringify(state));
   })

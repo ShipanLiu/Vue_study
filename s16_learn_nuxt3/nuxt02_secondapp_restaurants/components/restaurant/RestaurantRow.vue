@@ -1,32 +1,31 @@
 <script setup lang="ts">
-interface RowProps {
+
+// because we are not passing every single props, so we need to make it optional
+interface PropsType {
   rank?: number;
   name?: string;
   index?: number;
   isHeader?: boolean;
 }
 
-const props = defineProps<RowProps>();
+const props = defineProps<PropsType>();
+const { name, rank, index, isHeader } = props;
 </script>
 
 <template>
-  <div class="row" v-if="isHeader">
+  <div v-if="isHeader" class="row">
     <h4 class="header">Rank</h4>
     <h4 class="header">Chain</h4>
   </div>
-  <div
-    v-else
-    class="row"
-    :style="index % 2 === 0 ? { background: 'rgba(128,128,128,0.15)' } : null"
-  >
+  <!-- 在PropsType 里面定义的是：index?: string, 就说明 index 可能是 undefinded -->
+  <div v-else class="row" :style="(index !== undefined) && (index % 2 === 0) ? { background: 'rgba(128,128,128,0.15)' } : undefined">
     <h4 class="header rank">{{ rank }}</h4>
-    <NuxtLink :to="`/restaurants/${name}`" class="header link">{{
-      name
-    }}</NuxtLink>
+    <NuxtLink :to="`/restaurants/${name}`" class="header link">{{ name }}</NuxtLink>
   </div>
 </template>
 
 <style scoped>
+
 .row {
   border-top: 1px solid rgba(128, 128, 128, 0.336);
   display: flex;
