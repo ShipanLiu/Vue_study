@@ -1,30 +1,44 @@
 <!--因为可能有上千家 的 restaurants，你不可能创建那么多vue 文件 ==》 [name] 是 dynamic-->
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import { watchEffect } from "vue";
+// import { watchEffect } from "vue";
 
 import { useRestaurantsStore } from "@/stores/restaurantsStore";
+// import RestaurantAd from "@/components/restaurant/RestaurantAd.vue";
 
 
 const restaurantsStore = useRestaurantsStore();
 const route = useRoute();
-const router = useRouter();
+// const router = useRouter();
 const restaurantName = route.params.name;
 // we get the "restaurantName" from the path, and using this "restaurantName", we can get the Obj
 const restaurant = restaurantsStore.restaurantsArr.find((obj) => obj.name === restaurantName);
 
-watchEffect(() => {
-  if(!restaurant) {
-    router.replace("/404");
-  }
-});
+// watchEffect(() => {
+//   if(!restaurant) {
+//     router.push("/404");
+//   }
+// });
+
+
+// useMeta是 自定义 header 用的， 但是 需要install @nuxtjs/composition-api， 和当前的nuxt 版本不匹配。
+// useMeta({
+//   title: restaurant ? restaurant.name : "404 - Restaurant Not Found",
+//   meta: [
+//     {
+//       name: "viewport",
+//       content: "width=device-width",
+//     },
+//   ],
+// });
 
 
 </script>
 
 <template>
   <div>
-    <NuxtLayout v-if="restaurant" name="custom">
+    <!-- 套用 ad-layout.vue  这个 layout -->
+    <NuxtLayout v-if="restaurant" name="ad-layout">
       <div class="restaurant-container">
         <div class="image-container">
           <img :src="restaurant.imageUrl" alt="">
@@ -44,10 +58,22 @@ watchEffect(() => {
       </div>
     </NuxtLayout>
 
-    <!-- <div v-else>
-      <h2>somthing wrong</h2>
-      <NuxtLink to="/restaurants">go back to restaurants list</NuxtLink>
-    </div> -->
+    <div v-else class="restaurant-not-found">
+      <NuxtLayout name="error-layout">
+        <template #header-place>
+          <h1>Restaurant not found</h1>
+        </template>
+
+        <template #redirectEl-place>
+          <button
+            class="btn btn-primary btn-lg"
+            @click="$router.push('/restaurants')"
+          >
+            Go Back
+          </button>
+        </template>
+      </NuxtLayout>
+    </div>
   </div>
 </template>
 
@@ -70,6 +96,8 @@ watchEffect(() => {
   align-items: center;
   justify-content: center;
 }
+
+
 .info-container {
   padding: 3rem;
   width: 50%;
