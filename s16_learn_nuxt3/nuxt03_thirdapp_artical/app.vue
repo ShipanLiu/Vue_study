@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// useDarkMode 是可以被Nuxt 自动import 的。 不需要下面的 import
+import useDarkMode from "@/composables/useDarkMode"
+
 const { isDarkMode } = useDarkMode();
 
 // const lala;

@@ -7,13 +7,13 @@ const { isDarkMode } = useDarkMode();
     <div class="content-container">
       <div class="text-container">
         <h4>Based on your reading history</h4>
-        <h2 :style="isDarkMode ? { color: 'white' } : null">
+        <h2 :style="isDarkMode ? { color: 'white' } : undefined">
           Designing search for mobile apps
         </h2>
-        <p :style="isDarkMode ? { color: 'white' } : null" class="date">
+        <p :style="isDarkMode ? { color: 'white' } : undefined" class="date">
           Aug 26th, 2021, 4pm
         </p>
-        <p :style="isDarkMode ? { color: 'white' } : null" class="snippet">
+        <p :style="isDarkMode ? { color: 'white' } : undefined" class="snippet">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, in.
           Obcaecati in iusto minima impedit assumenda perferendis natus tempore
           modi ducimus. Blanditiis, quis. Maxime delectus ducimus assumenda vel

@@ -3,11 +3,13 @@ const { isDarkMode, toggleDarkMode } = useDarkMode();
 </script>
 
 <template>
-  <nav :style="isDarkMode ? { backgroundColor: 'rgb(73,72,72)' } : null">
-    <div :style="isDarkMode ? { color: 'white' } : null">
+  <nav :style="isDarkMode ? { backgroundColor: 'rgb(73,72,72)' } : undefined">
+    <div :style="isDarkMode ? { color: 'white' } : undefined">
       <h1>Artikle</h1>
       <label class="switch">
-        <input type="checkbox" v-model="isDarkMode" @click="toggleDarkMode" />
+        <!-- 这个 isDarkMode 和 这个 input 已经 two way bind  一起了 -->
+        <!-- 源码是 v-mode=“isDarkMode” -->
+        <input value="isDarkMode" type="checkbox" @click="toggleDarkMode">
         <span class="slider round"></span>
       </label>
     </div>

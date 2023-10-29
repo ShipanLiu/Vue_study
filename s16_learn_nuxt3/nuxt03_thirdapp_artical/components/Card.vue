@@ -8,12 +8,13 @@ interface CardProps {
 }
 const { isDarkMode } = useDarkMode();
 const props = defineProps<CardProps>();
+const { card } = props;
 </script>
 
 <template>
   <div
     class="card"
-    :style="isDarkMode ? { backgroundColor: 'black', color: 'white' } : null"
+    :style="isDarkMode ? { backgroundColor: 'black', color: 'white' } : undefined"
   >
     <img :src="card.img" alt="" />
     <div class="content">
