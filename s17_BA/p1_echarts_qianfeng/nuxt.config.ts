@@ -2,4 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@pinia/nuxt"],
+  build: {
+    transpile: ['echarts', 'zrender', 'tslib'],
+  },
 })
