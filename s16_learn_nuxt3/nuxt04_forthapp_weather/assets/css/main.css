@@ -1,0 +1,4 @@
+/* 参考 https://tailwindcss.com/docs/guides/nuxtjs */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
