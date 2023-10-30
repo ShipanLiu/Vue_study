@@ -1,16 +1,17 @@
 <script lang="ts" setup>
-import { PieChart } from 'echarts/charts'
+// 假如出现无法 import 的情况，那就重启vscode
+import { PieChart } from "echarts/charts"
 import {
   GridComponent,
   LegendComponent,
   TitleComponent,
   TooltipComponent,
-} from 'echarts/components'
+} from "echarts/components"
 
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { ref } from 'vue'
-import VChart from 'vue-echarts'
+import { use } from "echarts/core"
+import { CanvasRenderer } from "echarts/renderers"
+import { ref } from "vue"
+import VChart from "vue-echarts"
 use([
   CanvasRenderer,
   PieChart,
@@ -22,36 +23,36 @@ use([
 
 const option = ref({
   title: {
-    text: 'Traffic Sources',
-    left: 'center',
+    text: "Traffic Sources",
+    left: "center",
   },
   tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b} : {c} ({d}%)',
+    trigger: "item",
+    formatter: "{a} <br/>{b} : {c} ({d}%)",
   },
   legend: {
-    orient: 'vertical',
-    left: 'left',
-    data: ['Direct', 'Email', 'Ad Networks', 'Video Ads', 'Search Engines'],
+    orient: "vertical",
+    left: "left",
+    data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"],
   },
   series: [
     {
-      name: 'Traffic Sources',
-      type: 'pie',
-      radius: '55%',
-      center: ['50%', '60%'],
+      name: "Traffic Sources",
+      type: "pie",
+      radius: "55%",
+      center: ["50%", "60%"],
       data: [
-        { value: 335, name: 'Direct' },
-        { value: 310, name: 'Email' },
-        { value: 234, name: 'Ad Networks' },
-        { value: 135, name: 'Video Ads' },
-        { value: 1548, name: 'Search Engines' },
+        { value: 335, name: "Direct" },
+        { value: 310, name: "Email" },
+        { value: 234, name: "Ad Networks" },
+        { value: 135, name: "Video Ads" },
+        { value: 1548, name: "Search Engines" },
       ],
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)',
+          shadowColor: "rgba(0, 0, 0, 0.5)",
         },
       },
     },
