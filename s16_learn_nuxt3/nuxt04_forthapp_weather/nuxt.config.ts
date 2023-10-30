@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
 
   // 参考：https://tailwindcss.com/docs/guides/nuxtjs
-  css: ["@/assets/css/main.css"],
+  css: ["~/assets/css/main.css"],
 
   // 参考：https://tailwindcss.com/docs/guides/nuxtjs
   postcss: {
