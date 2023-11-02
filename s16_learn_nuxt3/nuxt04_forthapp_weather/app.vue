@@ -1,3 +1,11 @@
+<script setup lang="ts">
+
+// rename the "data" to "city"
+const { data: city, error } = await useFetch("https://api.openweathermap.org/data/2.5/weather?q=Baixiang&appid=c00c13b8fb810d0ca140b123119eadb9");
+
+</script>
+
+
 <template>
   <!-- set the hight of screensize | display: relative(kinder肯定是 absolute) |  overflow 的 全部 hidden -->
   <div class="h-screen relative overflow-hidden">
@@ -9,7 +17,9 @@
     <div class="absolute w-full h-full top-0 p-48">
       <div class="flex justify-between">
         <div>
-          <h1 class="text-7xl text-white">Toronto</h1>
+          <h5>{{ city }}</h5>
+          <h5>{{ error }}</h5>
+          <h1 class="text-7xl text-white">{{ city?.name }}</h1>
           <p class="text-2xl mt-2 text-white font-extralight">Sunday Dec 9th</p>
           <img class="w-56 icon" src="" alt="">
         </div>
