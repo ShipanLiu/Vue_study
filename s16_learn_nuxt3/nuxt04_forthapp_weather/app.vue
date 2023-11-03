@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import useDate from "@/composables/useDate"
+
 // cookie 是一个 {}， 里面只有一个 key names "city", the value should be a string.
 const cookie = useCookie<{ city: string }>("city") // city is the key in cookies
 const config = useRuntimeConfig();
+const { calcTodayDate } = useDate();
 
 // assign cookie first
 if(!cookie.value) {
@@ -117,12 +120,18 @@ const searchWeather = () => {
   // refresh();
 }
 
+
+const goBack = () => {
+  // change cityName back ==会产生==>  trigger refetch， 原因： useAsyncData里面的watch 关键字。
+  cityName.value = cookie.value.city;
+}
+
 </script>
 
 
 <template>
   <!-- set the hight of screensize | display: relative(kinder肯定是 absolute) |  overflow 的 全部 hidden -->
-  <div class="h-screen relative overflow-hidden">
+  <div v-if="city" class="h-screen relative overflow-hidden">
     <img :src="backgroundImg" alt="">
     <!-- I want to have a  -->
     <!-- the width and hight should be 100% | 距离top 是 0 |  overlay是我自己定义的style -->
@@ -132,7 +141,7 @@ const searchWeather = () => {
       <div class="flex justify-between">
         <div>
           <h1 class="text-7xl text-white">{{ city?.name }}</h1>
-          <p class="text-2xl mt-2 text-white font-extralight">Sunday Dec 9th</p>
+          <p class="text-2xl mt-2 text-white font-extralight">{{ calcTodayDate() }}</p>
           <img class="w-56 icon" :src="`https://openweathermap.org/img/wn/${city.weather[0].icon}@4x.png`" alt="image not found">
         </div>
         <div>
@@ -145,6 +154,10 @@ const searchWeather = () => {
         <button class="w-20 h-10 text-white bg-sky-400" @click="searchWeather">Search</button>
       </div>
     </div>
+  </div>
+  <div v-else class="p-10">
+    <h1 class="text-7xl">Oops, we can not find that city</h1>
+    <button class="text-white mt-5 bg-sky-400 px-10 w-50 h-10" @click="goBack">Go Back</button>
   </div>
 </template>
 

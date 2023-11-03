@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   // runtime config: To expose config and environment variables to the rest of your app, you will need to define runtime configuration in your nuxt.config file, using the runtimeConfig option.
   runtimeConfig: {
     // The private keys which are ONLY available within server-side
-    exampleApiSecret: "123", // 可以用 .env内部的内容
+    exampleApiSecret: "this is only seeable in server side", // 可以用 .env内部的内容
     // Keys within public, will be also exposed to the client-side
     public: {
       appid: process.env.WEATHER_APP_SECRET // 调用.env内部的内容
