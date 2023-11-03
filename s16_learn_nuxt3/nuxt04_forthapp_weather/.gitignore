@@ -18,7 +18,7 @@ logs
 .fleet
 .idea
 
-# Local env files
+# Local env files, 这里存的是 appid 比如。
 .env
 .env.*
 !.env.example
