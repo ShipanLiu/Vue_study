@@ -131,7 +131,7 @@ const goBack = () => {
 
 <template>
   <!-- set the hight of screensize | display: relative(kinder肯定是 absolute) |  overflow 的 全部 hidden -->
-  <div v-if="city" class="h-screen relative overflow-hidden">
+  <div v-if="city" class="h-screen relative overflow-hidden w-screen">
     <img :src="backgroundImg" alt="">
     <!-- I want to have a  -->
     <!-- the width and hight should be 100% | 距离top 是 0 |  overlay是我自己定义的style -->

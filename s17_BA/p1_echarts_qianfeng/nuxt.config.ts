@@ -3,6 +3,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@pinia/nuxt"],
   build: {
-    transpile: ["echarts", "zrender", "tslib"],
+    transpile: [/echarts/],
   },
+  // for tailwind
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  css: ["~/assets/css/main.css"],
 })
