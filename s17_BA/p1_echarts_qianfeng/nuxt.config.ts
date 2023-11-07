@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@nuxt/ui", "@element-plus/nuxt"],
   build: {
-    transpile: [/echarts/],
+    transpile: ["echarts", "zrender", "tslib"],
   },
   // for tailwind
   postcss: {
@@ -13,4 +13,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css"],
+
+  // elementplus
+  elementPlus: {}
 })

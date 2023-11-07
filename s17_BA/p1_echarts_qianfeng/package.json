@@ -10,10 +10,12 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.6",
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@typescript-eslint/parser": "^6.7.5",
     "autoprefixer": "^10.4.16",
+    "element-plus": "^2.4.2",
     "eslint": "^8.51.0",
     "nuxt": "^3.7.4",
     "postcss": "^8.4.31",
@@ -23,6 +25,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@nuxt/ui": "^2.10.0",
     "@pinia/nuxt": "^0.5.1",
     "echarts": "^5.4.3",
     "pinia": "^2.1.7",

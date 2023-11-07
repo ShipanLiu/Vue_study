@@ -1,14 +1,34 @@
 <!--  注意命名， 就应该叫 default.vue -->
 
 <script setup lang="ts">
+import Headbar from "@/components/headbar/headerbar.vue"
+
+
+
 
 </script>
 
 
 <template>
-  <!-- can't use container, because container will set a max-width, 阴影面积不会完全覆盖-->
-  <div class="h-screen w-screen relative bg-gray-200 overflow-hidden">
-    <slot />
+  <div id="main-layout" class="flex flex-col w-screen h-screen bg-gray-100">
+    <!-- Header area -->
+    <header class="text-white w-full h-16 flex items-center px-4">
+      <!-- Navigation content goes here -->
+      <Headbar />
+    </header>
+
+    <!-- Sidebar and main area -->
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Sidebar area -->
+      <aside class=" w-1/12  h-full overflow-y-auto">
+        <!-- Sidebar content goes here -->
+      </aside>
+
+      <!-- Main content area -->
+      <main class="flex-1 bg-white overflow-y-auto p-4">
+        <slot />
+      </main>
+    </div>
   </div>
 </template>
 

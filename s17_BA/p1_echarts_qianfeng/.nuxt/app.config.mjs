@@ -5,6 +5,31 @@ import { defuFn } from '/Volumes/D/Z_Frond_Back_workplace/06_Front_end/03_Vue/Vu
 const inlineConfig = {
   "nuxt": {
     "buildId": "test"
+  },
+  "ui": {
+    "primary": "green",
+    "gray": "cool",
+    "colors": [
+      "red",
+      "orange",
+      "amber",
+      "yellow",
+      "lime",
+      "green",
+      "emerald",
+      "teal",
+      "cyan",
+      "sky",
+      "blue",
+      "indigo",
+      "violet",
+      "purple",
+      "fuchsia",
+      "pink",
+      "rose",
+      "primary"
+    ],
+    "strategy": "merge"
   }
 }
 
