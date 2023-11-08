@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- scroll-smooth 保证下滑柔顺 -->
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +9,7 @@
     <title>Interactivity</title>
   </head>
   <body>
-    <a href="#item">Scroll To Item</a>
+    <a href="#item">Scroll To Item[click me and scroll]</a>
     <!-- Hover State Styling -->
     <button
       type="button"
@@ -36,11 +37,12 @@
     <!-- Styling based on parent state -->
     <!-- When you need to style an element based on the state of some parent element, mark the parent with the group class, and use group-* modifiers like group-hover to style the target element: -->
     <a href="#" class="group block max-w-xs mx-auto rounded-lg p-6 bg-white shadow-lg space-y-3 hover:bg-sky-500">
-  <div class="flex items-center">
-    <h3 class="group-hover:text-white">Card Title</h3>
-  </div>
-  <p class="group-hover:text-white">This is some card text</p>
-</a>
+      <div class="flex items-center">
+        <!-- group 相当于听从parent 的状态 -->
+        <h3 class="group-hover:text-white">Card Title</h3>
+      </div>
+      <p class="group-hover:text-white">This is some card text</p>
+    </a>
 
  <br>
 
@@ -75,6 +77,7 @@
     <br />
 
     <!-- Cursor -->
+    <h1 class="text-5xl my-10 text-blue-500 bg-green-100 inline-block">Cursor<h2/>
     <button
       type="button"
       class="bg-black text-white py-3 px-5 rounded-lg m-3 cursor-pointer"

@@ -7,27 +7,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Columns</title>
   </head>
+  <!--
+
+    规定column 的 数量。 [不是太重要]
+
+   -->
+
+
   <body>
+    <!-- no matter how many columns you have, you will always and only have 2 columns -->
     <div class="columns-2 gap-8">
-      <img class="w-full" src="/assets/img/img1.jpg" />
-      <img class="w-full" src="/assets/img/img2.jpg" />
-      <img class="w-full break-after-column" src="/assets/img/img3.jpg" />
-      <img class="w-full" src="/assets/img/img4.jpg" />
+      <img class="w-full" src="../assets/img/img1.jpg" />
+      <img class="w-full" src="../assets/img/img2.jpg" />
+      <!-- break-after-column: 相当于 按下了回车 -->
+      <img class="w-full break-after-column" src="../assets/img/img3.jpg" />
+      <img class="w-full" src="../assets/img/img4.jpg" />
     </div>
     <div class="columns-3 gap-24">
-      <img class="w-full" src="/assets/img/img3.jpg" />
-      <img class="w-full break-before-column" src="/assets/img/img4.jpg" />
-      <img class="w-full" src="/assets/img/img5.jpg" />
-      <img class="w-full" src="/assets/img/img6.jpg" />
-      <img class="w-full" src="/assets/img/img7.jpg" />
+      <img class="w-full" src="../assets/img/img3.jpg" />
+      <img class="w-full break-before-column" src="../assets/img/img4.jpg" />
+      <img class="w-full" src="../assets/img/img5.jpg" />
+      <img class="w-full" src="../assets/img/img6.jpg" />
+      <img class="w-full" src="../assets/img/img7.jpg" />
     </div>
+
+
+
+    <!--columns-3xs， 这里 columns 的数量是 不指定的， 根据屏幕的变化而变化  -->
+    <h2 class="text-blue-200 text-6xl">columns-3xs</h2>
     <div class="columns-3xs">
       <!-- Video Aspect Ratio -->
-      <img class="w-full aspect-video" src="/assets/img/img8.jpg" />
+      <img class="w-full aspect-video" src="../assets/img/img8.jpg" />
       <!-- Square Aspect Ratio -->
-      <img class="w-full aspect-square" src="/assets/img/img9.jpg" />
-      <img class="w-full break" src="/assets/img/img1.jpg" />
-      <img class="w-full" src="/assets/img/img2.jpg" />
+      <img class="w-full aspect-square" src="../assets/img/img9.jpg" />
+      <img class="w-full break" src="../assets/img/img1.jpg" />
+      <img class="w-full" src="../assets/img/img2.jpg" />
     </div>
   </body>
 </html>
